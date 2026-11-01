@@ -1,0 +1,25 @@
+# Project rules. DEXPI/model-validation and connectivity rules are NOT configured here as "project" rules;
+# only severity/enable overrides, scopes and completeness / naming rules are.
+rules:
+  CONN-001: {severity: warning}
+  CONN-003: {severity: error}
+  CONN-004: {severity: review}
+  CONN-005: {severity: warning}
+  PRJ-TAG-001: {severity: error}
+  # CLT-TAG-001: {enabled: false}
+
+duplicate_tag:
+  scope: project            # project | drawing | unit
+
+required:                   # "A|B" means any one of these properties satisfies the requirement
+  valve:      [tag, "ValveType|Type", "Service|ServiceAttribute"]
+  line:       ["LineNumber|PipingNetworkSegmentNumber"]
+  equipment:  [tag, class, "Service|ServiceAttribute"]
+  instrument: [tag, "Function|InstrumentFunction"]
+
+client_tag_patterns:        # regex per kind (client naming standard)
+  valve:      '^[A-Z]{2,4}-\d{3,4}[A-Z]?$'
+  equipment:  '^[A-Z]-\d{3}[A-Z]?$'
+  instrument: '^[A-Z]{2,4}-\d{3,4}[A-Z]?$'
+
+terminal_class_keywords: [blind, cap, plug, vent, drain, spectacle]

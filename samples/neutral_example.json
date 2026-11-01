@@ -1,0 +1,15 @@
+{
+  "drawing": "PID-PDF-002",
+  "version": "n/a",
+  "objects": [
+    {"id": "e1", "kind": "equipment", "class": "Tank", "tag": "T-201", "properties": {"Service": "Slop"}, "review_status": "extracted",
+     "source": {"element": "pdf", "drawing": "PID-PDF-002", "location": {"page": 1, "x": 120, "y": 340}}},
+    {"id": "n1", "kind": "nozzle", "class": "Nozzle", "tag": "N1", "parent_id": "e1", "review_status": "extracted",
+     "source": {"element": "pdf", "location": {"page": 1, "x": 130, "y": 350}}},
+    {"id": "v1", "kind": "valve", "class": "GateValve", "tag": "XV-201", "properties": {"ValveType": "Gate", "Service": "Slop"},
+     "review_status": "extracted", "source": {"element": "pdf", "location": {"page": 1, "x": 200, "y": 350}}}
+  ],
+  "relationships": [
+    {"source_id": "n1", "target_id": "v1", "type": "connection", "confidence": 0.58, "provenance": "pdf-candidate"}
+  ]
+}

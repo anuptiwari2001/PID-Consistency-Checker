@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Small DEXPI 1.3 Proteus-style sample with deliberate defects. Not a real project file. -->
+<PlantModel>
+  <PlantInformation SchemaVersion="4.0.0" Application="sample" Date="2026-11-01"/>
+  <Drawing Name="PID-001" Title="Feed pump system"/>
+
+  <Equipment ID="EQ-1" ComponentClass="CentrifugalPump" TagName="P-101">
+    <GenericAttributes Number="1"><GenericAttribute Name="Service" Value="Feed pump" Format="string"/></GenericAttributes>
+    <Nozzle ID="N-1" ComponentClass="Nozzle" TagName="N1"><ConnectionPoints NumPoints="1"/></Nozzle>
+    <Nozzle ID="N-2" ComponentClass="Nozzle" TagName="N2">
+      <GenericAttributes Number="1"><GenericAttribute Name="Remarks" Value="N2 SPARE, BLIND FLANGED"/></GenericAttributes>
+      <ConnectionPoints NumPoints="1"/>
+    </Nozzle>
+    <Nozzle ID="N-3" ComponentClass="Nozzle" TagName="N3"><ConnectionPoints NumPoints="1"/></Nozzle>
+    <Nozzle ID="N-4" ComponentClass="Nozzle" TagName="N4">
+      <GenericAttributes Number="1"><GenericAttribute Name="NozzleStatus" Value="Plugged"/></GenericAttributes>
+      <ConnectionPoints NumPoints="1"/>
+    </Nozzle>
+    <Nozzle ID="N-5" ComponentClass="Nozzle" TagName="N5">
+      <GenericAttributes Number="1"><GenericAttribute Name="Remarks" Value="Provision for future tie-in by others"/></GenericAttributes>
+      <ConnectionPoints NumPoints="1"/>
+    </Nozzle>
+  </Equipment>
+
+  <!-- V-101 has no Service property: project completeness finding -->
+  <Equipment ID="EQ-2" ComponentClass="Vessel" TagName="V-101">
+    <Nozzle ID="N-V1" ComponentClass="Nozzle" TagName="N1"><ConnectionPoints NumPoints="1"/></Nozzle>
+  </Equipment>
+
+  <PipingNetworkSystem ID="PNS-1">
+    <PipingNetworkSegment ID="SEG-1" ComponentClass="PipingNetworkSegment">
+      <GenericAttributes Number="1"><GenericAttribute Name="LineNumber" Value='10"-P-101-A1'/></GenericAttributes>
+      <PipingComponent ID="GV-1" ComponentClass="GateValve" TagName="XV-101">
+        <GenericAttributes Number="2">
+          <GenericAttribute Name="ValveType" Value="Gate"/><GenericAttribute Name="Service" Value="Feed"/>
+        </GenericAttributes>
+        <ConnectionPoints NumPoints="2"/>
+      </PipingComponent>
+      <PipingComponent ID="GV-2" ComponentClass="GateValve" TagName="XV-101">
+        <GenericAttributes Number="2">
+          <GenericAttribute Name="ValveType" Value="Gate"/><GenericAttribute Name="Service" Value="Feed"/>
+        </GenericAttributes>
+        <ConnectionPoints NumPoints="2"/>
+      </PipingComponent>
+      <PipingComponent ID="GV-3" ComponentClass="BallValve" TagName="XV-103">
+        <ConnectionPoints NumPoints="2"/>
+      </PipingComponent>
+      <Connection FromID="N-1" FromNode="1" ToID="GV-1" ToNode="1"/>
+      <Connection FromID="GV-1" FromNode="2" ToID="GV-2" ToNode="1"/>
+      <Connection FromID="GV-2" FromNode="2" ToID="N-V1" ToNode="1"/>
+      <Connection FromID="GV-2" FromNode="2" ToID="GV-3" ToNode="1"/>
+      <!-- defects: node 3 does not exist; unknown target; connection with no target -->
+      <Connection FromID="GV-1" FromNode="3" ToID="GV-2" ToNode="1"/>
+      <Connection FromID="GV-2" FromNode="2" ToID="MISSING-9" ToNode="1"/>
+      <Connection FromID="GV-2" FromNode="2"/>
+    </PipingNetworkSegment>
+
+    <!-- isolated island, and no line number -->
+    <PipingNetworkSegment ID="SEG-2" ComponentClass="PipingNetworkSegment">
+      <PipingComponent ID="GV-4" ComponentClass="BallValve" TagName="HV-201">
+        <GenericAttributes Number="2">
+          <GenericAttribute Name="ValveType" Value="Ball"/><GenericAttribute Name="Service" Value="Drain"/>
+        </GenericAttributes>
+      </PipingComponent>
+      <PipingComponent ID="PIPE-1" ComponentClass="Pipe"/>
+      <Connection FromID="GV-4" ToID="PIPE-1"/>
+    </PipingNetworkSegment>
+  </PipingNetworkSystem>
+
+  <ProcessInstrumentationFunction ID="PIF-1" ComponentClass="ProcessInstrumentationFunction" TagName="PT-101">
+    <GenericAttributes Number="1"><GenericAttribute Name="Function" Value="Pressure transmitter"/></GenericAttributes>
+    <Association Type="is located in" ItemID="GV-1"/>
+  </ProcessInstrumentationFunction>
+  <ProcessInstrumentationFunction ID="PIF-2" ComponentClass="ProcessInstrumentationFunction" TagName="PT-102">
+    <GenericAttributes Number="1"><GenericAttribute Name="Function" Value="Pressure indicator"/></GenericAttributes>
+  </ProcessInstrumentationFunction>
+  <ProcessInstrumentationFunction ID="PIF-4" ComponentClass="ProcessInstrumentationFunction" TagName="PT-104">
+    <GenericAttributes Number="1"><GenericAttribute Name="Function" Value="Pressure transmitter"/></GenericAttributes>
+  </ProcessInstrumentationFunction>
+  <InstrumentationLoopFunction ID="LP-1" ComponentClass="InstrumentationLoopFunction" TagName="LP-101">
+    <ProcessInstrumentationFunction ID="PIF-3" ComponentClass="ProcessInstrumentationFunction" TagName="PT-103">
+      <GenericAttributes Number="1"><GenericAttribute Name="Function" Value="Pressure transmitter"/></GenericAttributes>
+    </ProcessInstrumentationFunction>
+  </InstrumentationLoopFunction>
+</PlantModel>

@@ -1,0 +1,32 @@
+# Project rules - edit freely, no code changes needed.
+
+line_number:
+  # leave a list empty to skip that check
+  allowed_fluids: []          # e.g. [P, PW, FG, FW, CW, HC, SW]
+  allowed_specs: []           # e.g. [A1A, B1B, D1D]
+  size_mismatch_severity: Medium   # same line, different size across sheets (reducers can be legit)
+
+instrument:
+  # Functions accepted in this project. Anything else is flagged for review.
+  allowed_functions: [
+    PT, PI, PIT, PIC, PIA, PG, PCV, PSV, PSE, PSH, PSL, PSHH, PSLL, PDT, PDI, PDIT, PDG, PV,
+    TT, TI, TIT, TIC, TE, TW, TG, TCV, TV, TSH, TSL, TSHH, TSLL,
+    FT, FI, FIT, FIC, FE, FO, FQ, FCV, FV, FSH, FSL,
+    LT, LI, LIT, LIC, LG, LCV, LV, LSH, LSL, LSHH, LSLL, LSHL,
+    AT, AIT, AI, AE, AAH, AAL,
+    XV, XS, XY, XA, ZT, ZSO, ZSC, ZSH, ZSL, ZSHH, ZSLL, ZV,
+    HV, HS, HC, SDV, BDV, ESDV, ESD, RO, SV, YV, VT, ST, SI
+  ]
+  # distance (PDF points) within which a drawn line must exist near an instrument bubble
+  search_radius_pt: 45
+
+nozzle:
+  search_radius_pt: 45
+
+drawing:
+  # Optional: regex a drawing/sheet number must match, searched in the title block.
+  # Leave empty to skip. Example: "^[A-Z0-9]{3,}-PID-\\d{3}"
+  number_regex: ""
+
+llm:
+  enabled: true

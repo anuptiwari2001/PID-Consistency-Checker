@@ -1,0 +1,7 @@
+# Reviewer-approved exceptions. "object" = object id, tag, or ParentTag/Tag (e.g. P-101/N4).
+exceptions:
+  - rule_id: CONN-004
+    object: PT-102
+    reason: "Panel-mounted indicator, vendor package scope"
+    reviewer: "A. Tiwari"
+    date: "2026-11-01"
